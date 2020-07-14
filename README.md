@@ -1,13 +1,17 @@
 # OficinaAWSEducateSAS
 Oficina a cerca de recursos do programa AWS Educate para o SAS do PROCC - Visão do Aluno
 
+Links úteis:
+
+* https://docs.aws.amazon.com/
+
+
 ## Objetivos
 
 * Introduzir os recursos oferecidos pelo AWS Educate 
-* Experimentar a condução de prática de laboratório no estilo EAD através dos seguintes recursos:
+* Experimentar a condução de prática de laboratório no estilo videoconcerência através dos seguintes recursos:
   * EC2 e Cloud9 (AWS)
   * GitHub Classroom  
-
 
 ## (A) Preparar abas
 
@@ -161,10 +165,65 @@ sudo rabbitmq-plugins enable rabbitmq_management
 * Acrescente ":15672" no final da URL e clique "enter"
 
 
+## (E) Exemplo simples de uso do servidor RabbitMQ
+
+### Tarefa E1. Clonando o repositório público "OficinaAWSEducateSAS"
+
+* Logado na sua conta do GitHub, faça "fork" no repositório "tarcisiodarocha/OficinaAWSEducateSAS"
+* No branch criado, clique em "Code" e copie a URL do repositório para clonagem
+* No console do Cloud9 (diretório ~/environment/ ) clone o repositório com o seguinte comando (forneça a url do repositório)
+``` 
+   git clone <url-do-repositorio>
+``` 
+
+### Tarefa E2. Clonando um repositório de assignment do GitHub Classroom 
+
+* Siga os passos a partir dessa URL de assignment: https://classroom.github.com/a/2JnkiXja
+* No repositório criado, clique em "Code" e copie a URL do repositório para clonagem
+* No console do Cloud9 (diretório ~/environment/ ) clone o repositório com o seguinte comando (forneça a url do repositório)
+``` 
+   git clone <url-do-repositorio>
+``` 
+
+### Tarefa E3. Preparando as dependências do exemplo
+
+* No console do Cloud9, instale a dependência do emissor Python
+``` 
+   go get github.com/streadway/amqp
+``` 
+* Instale a dependência do receptor Go
+``` 
+   python -m pip install pika --upgrade
+``` 
 
 
+### Tarefa E4. Enviando mensagem com emissor Python
 
+* No console do Cloud9, entre no diretório do repositório do assignment
+* Na árvore de diretórios à esquerda, abra o arquivo "Emissor.py" 
+* Altere "usuário", "senha" e "hostname" com os dados do seu servidor RabbitMQ e salve o arquivo com "CRTL+S"
+* No console, execute o emissor com
+``` 
+   python Emissor.py
+``` 
 
+### Tarefa E5. Recebando mensagem com receptor Go
+
+* Abra o arquivo "Receptor.go" 
+* Altere "usuário", "senha" e "hostname" com os dados do seu servidor RabbitMQ e salve o arquivo com "CRTL+S"
+* No console, execute o emissor com
+``` 
+   go run Receptor.go
+``` 
+
+### Tarefa E6. Submeta um commit da tarefa ao professor do assignment
+
+* No diretório do assignment, execute os comandos git
+``` 
+   git add .
+   git commit -m "submissão da tarefa"
+   git push
+``` 
 
 
  
